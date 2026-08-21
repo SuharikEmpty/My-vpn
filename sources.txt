@@ -1,2 +1,9 @@
 https://raw.githubusercontent.com/btsk161/Freeinternet_byMygalaru.github.io/refs/heads/main/premium.txt
 https://hub.mos.ru/zieng2/wl/raw/main/list_universal.txt
+https://raw.githubusercontent.com/AirLinkVPN1/AirLinkVPN/refs/heads/main/rkn_white_list#AirLinkVPN
+https://raw.githubusercontent.com/modrinthmodification-create/ownedvpn/main/subscription.txt#%E2%9C%85subscription%E2%9C%85%20%40embedium
+https://raw.githubusercontent.com/RKPchannel/RKP_bypass_configs/refs/heads/main/whitelist.txt#%F0%9F%8F%B3%20%23%D0%A0%D0%BE%D1%81%D0%9A%D0%BE%D0%BC%D0%9F%D0%BE%D0%B7%D0%BE%D1%80%20%7C%20%D0%91%D0%B5%D0%BB%D1%8B%D0%B5%20%D1%81%D0%BF%D0%B8%D1%81%D0%BA%D0%B8
+https://gitverse.ru/api/repos/bywarm/rser/raw/branch/master/wl.txt#WL%20RUS%20(wl.txt)
+https://internet-tenshi.kangel.tech/whitelist#%D1%8D%D1%82%D0%BE%20%D0%BD%D0%B5%20%D1%8F
+https://codeberg.org/kfwl/sub/raw/branch/main/sub.txt#Kfwl%20sub%20%F0%9F%8C%B4
+https://raw.githubusercontent.com/ewecrow78-gif/whitelist1/main/list.txt#%F0%9F%8F%B3%EF%B8%8F%20Gh0st_WhiteList%20%F0%9F%8F%B3%EF%B8%8F
