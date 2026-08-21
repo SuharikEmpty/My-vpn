@@ -1,14 +1,12 @@
 import requests
 import socket
+import ssl
 import concurrent.futures
 import random
 
 # Настройки
-TIMEOUT = 4
+TIMEOUT = 5
 MAX_WORKERS = 200
-MAX_CHECK = 500
-TARGET_ALIVE = 300
-MAX_SERVERS = 500
 
 def extract_host_port(line):
     try:
@@ -22,11 +20,23 @@ def check_server(line):
     host, port = extract_host_port(line)
     if not host:
         return None
+
+    # 1. TCP-проверка
     try:
-        with socket.create_connection((host, port), timeout=TIMEOUT):
-            return line
+        sock = socket.create_connection((host, port), timeout=TIMEOUT)
     except:
         return None
+
+    # 2. TLS-проверка
+    try:
+        ctx = ssl.create_default_context()
+        with ctx.wrap_socket(sock, server_hostname=host) as tls:
+            if tls.getpeercert():
+                return line
+    except:
+        pass
+
+    return None
 
 # Скачиваем подписки
 with open("sources.txt", "r", encoding="utf-8") as f:
@@ -57,30 +67,18 @@ print(f"Всего после фильтрации: {len(all_lines)}")
 lines_list = list(all_lines)
 random.shuffle(lines_list)
 
-# Проверяем только часть
-to_check = lines_list[:MAX_CHECK]
-rest = lines_list[MAX_CHECK:]
-
+# Проверяем все
 alive = []
 with concurrent.futures.ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
-    results = executor.map(check_server, to_check)
+    results = executor.map(check_server, lines_list)
     for res in results:
         if res:
             alive.append(res)
-            if len(alive) >= TARGET_ALIVE:
-                break
 
 print(f"Живых: {len(alive)}")
 
-# Если живых не хватило, добавляем остальные без проверки
-if len(alive) < TARGET_ALIVE:
-    needed = TARGET_ALIVE - len(alive)
-    alive.extend(rest[:needed])
-
-# Ограничиваем итог
-final = alive[:MAX_SERVERS]
-
+# Сохраняем только живых
 with open("merged.txt", "w", encoding="utf-8") as f:
-    f.write("\n".join(final))
+    f.write("\n".join(alive))
 
-print(f"Итог: {len(final)}")
+print(f"Итог: {len(alive)}")
