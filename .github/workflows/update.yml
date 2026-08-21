@@ -20,6 +20,13 @@ jobs:
 
       - run: pip install requests
 
+      - name: Download Xray-core
+        run: |
+          wget -O xray.zip https://github.com/XTLS/Xray-core/releases/latest/download/Xray-linux-64.zip
+          unzip -o xray.zip
+          chmod +x xray
+          ./xray version
+
       - run: python combine.py
 
       - name: Commit merged.txt
