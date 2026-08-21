@@ -10,10 +10,14 @@ for url in urls:
     try:
         r = requests.get(url, timeout=30, headers={"User-Agent": "Mozilla/5.0"})
         if r.status_code == 200:
-            for line in r.text.splitlines():
-                line = line.strip()
-                if line.startswith(("vless://", "vmess://", "trojan://", "ss://", "hysteria2://")):
-                    all_lines.add(line)
+            for raw in r.text.splitlines():
+                raw = raw.strip()
+                if not raw:
+                    continue
+                if not raw.startswith(("vless://", "vmess://", "trojan://", "ss://", "hysteria2://")):
+                    continue
+                raw = raw.split("#")[0]
+                all_lines.add(raw)
     except:
         pass
 
